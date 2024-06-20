@@ -41,7 +41,7 @@ def job():
         options.add_argument("--no-sandbox")
         driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
         driver.set_window_size(1366, 768)
-        driver.get("https://splitthepot.games/betlion-ke/crashx/supersonic?token=148b549d-c3d6-4da3-a083-2bb82ff9ada6")
+        driver.get("https://splitthepot.games/betlion-ke/crashx/supersonic?token=982752c0-7c67-48ef-b924-bf7270a26821")
         import time
         time.sleep(10)
         # Define the X and Y coordinates where you want to click
