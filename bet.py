@@ -41,10 +41,11 @@ def job():
         options.add_argument("--no-sandbox")
         driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
         driver.set_window_size(1366, 768)
-        driver.get("https://splitthepot.games/betlion-ke/crashx/supersonic?token=7d010c75-7653-43f8-979b-a35b8fe2bc7e")
-        import time
-        time.sleep(10)
-        # Define the X and Y coordinates where you want to click
+        start_time = time.time()
+        link = "https://splitthepot.games/betlion-ke/crashx/supersonic?token=e563240f-f670-4763-93d8-e5053f8cc1b4"
+        driver.get(link)
+
+        time.sleep(20)
         x_coordinate = 100
         y_coordinate = 200
 
@@ -57,9 +58,29 @@ def job():
         # Perform a click at the specified coordinates
         actions.click().perform()
 
+        time.sleep(5)
+        # Scroll down 200 pixels
+
+        driver.execute_script("window.scrollBy(0, 200);")
+        driver.find_element(By.XPATH,
+                            "/html/body/app-root/app-crashx/div/div/div[1]/stp-crash-multi/div[2]/div[2]/div[1]/div[1]/stp-form-field-group/stp-toggle/div/button/span[1]").click()
+        # Locate the input field using the XPath
+        input_field = driver.find_element(By.XPATH,
+                                          "/html/body/app-root/app-crashx/div/div/div[1]/stp-crash-multi/div[2]/div[2]/div[2]/stp-all-in-one-stake-input/div[1]/div[2]/div[1]/input")
+
+        # Clear the input field
+        input_field.clear()
+
+        # Write the value 1.00 into the input field
+        input_field.send_keys("1.00")
+        driver.find_element(By.XPATH,
+                            "/html/body/app-root/app-crashx/div/div/div[1]/stp-crash-multi/div[2]/div[2]/div[1]/div[2]/stp-switch/label/span/span[1]").click()
+        driver.find_element(By.XPATH,
+                            "/html/body/app-root/app-crashx/div/div/div[1]/stp-crash-multi/div[2]/div[2]/div[2]/stp-all-in-one-stake-input/div[2]/button/span[2]").click()
+
         time.sleep(10)
 
-        for x in range(100000):
+        for x in range(3000):
             # Execute JavaScript to simulate a click at specific coordinates
             script = "var evt = new MouseEvent('click', { bubbles: true, cancelable: true, clientX: 1100, clientY: 100 });" \
                      "document.elementFromPoint(1000, 200).dispatchEvent(evt);"
@@ -159,7 +180,82 @@ def job():
                        "document.elementFromPoint(1100, 360).dispatchEvent(evt);"
             driver.execute_script(script27)
             print(x)
+        for k in range(1):
+            driver.quit()
+            time.sleep(1)
+            options = webdriver.ChromeOptions()
+            options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+            options.add_argument("--headless")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument("--no-sandbox")
+            driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
+            driver.get(link)
+            import time
+            time.sleep(10)
+            try:
+                driver.find_element(By.XPATH,
+                                    "/html/body/div[2]/div[4]/div/mat-dialog-container/div/div/app-free-round-available-dialog/app-modal-with-header/mat-dialog-actions/button[2]/span[2]").click()
+                time.sleep(3)
+                x_coordinate = 100
+                y_coordinate = 200
 
+                # Create an ActionChains object
+                actions = ActionChains(driver)
+
+                # Move the mouse cursor to the specified coordinates (X, Y)
+                actions.move_by_offset(x_coordinate, y_coordinate).perform()
+
+                # Perform a click at the specified coordinates
+                actions.click().perform()
+
+                time.sleep(2)
+            except NoSuchElementException:
+                x_coordinate = 100
+                y_coordinate = 200
+
+                # Create an ActionChains object
+                actions = ActionChains(driver)
+
+                # Move the mouse cursor to the specified coordinates (X, Y)
+                actions.move_by_offset(x_coordinate, y_coordinate).perform()
+
+                # Perform a click at the specified coordinates
+                actions.click().perform()
+
+                time.sleep(2)
+
+            # INCLUDED
+            try:
+
+                time.sleep(1)
+                # Scroll down by 200 pixels
+                scroll_pixels = 200
+                driver.execute_script(f"window.scrollBy(0, {scroll_pixels});")
+
+                time.sleep(4)
+
+                # clear
+                jeje = driver.find_element(By.XPATH,
+                                           "/html/body/app-root/app-crashx/div/div/div[1]/stp-crash-multi/div[2]/div[2]/div[1]/div[1]/stp-observable-input-field/stp-form-field/div/div[2]/div[2]/input")
+                jeje.clear()
+                random_choice = round(random.uniform(5.00, 8.00), 2)
+                jeje.send_keys(str(random_choice))
+
+                time.sleep(1)
+                driver.find_element(By.XPATH,
+                                    "/html/body/app-root/app-crashx/div/div/div[1]/stp-crash-multi/div[2]/div[2]/div[2]/stp-all-in-one-free-rounds/div[2]/button").click()
+
+                time.sleep(115)
+
+
+            except NoSuchElementException:
+                # If the element is not found, print "none found"
+                print("None found")
+        driver.quit()
+        end_time = time.time()
+        # Calculate the elapsed time
+        elapsed_time = end_time - start_time
+        print(f"Elapsed time: {elapsed_time:.2f} seconds")
 
     safi()
     print("DONE")
