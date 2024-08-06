@@ -81,6 +81,14 @@ def job():
         time.sleep(10)
 
         for x in range(3000):
+            try:
+                driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div/mat-dialog-container/div/div/inactivity-dialog/app-modal-with-header/mat-dialog-actions/button/span[2]").click()
+                time.sleep(5)
+
+
+            except NoSuchElementException:
+                # If the element is not found, print "none found"
+                print("None found")
             # Execute JavaScript to simulate a click at specific coordinates
             script = "var evt = new MouseEvent('click', { bubbles: true, cancelable: true, clientX: 1100, clientY: 100 });" \
                      "document.elementFromPoint(1000, 200).dispatchEvent(evt);"
